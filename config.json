@@ -1,0 +1,9 @@
+{
+    "participant": "matt",
+    "difficulty_scale": 10,
+    "generator_type": "naive",
+    "data": {
+        "challenge_data_path": "./data/challenge_data.json",
+        "participant_data_path": "./data/participants.json"
+    }
+}

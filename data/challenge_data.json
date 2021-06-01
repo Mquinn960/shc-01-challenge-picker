@@ -1,0 +1,48 @@
+{
+    "objectives": [
+        {
+            "name": "challenge generator",
+            "difficulty": 5
+        },
+        {
+            "name": "musical note identifier",
+            "difficulty": 2
+        },
+        {
+            "name": "project file managet",
+            "difficulty": 2
+        },
+        {
+            "name": "enigma machine",
+            "difficulty": 9
+        },
+        {
+            "name": "fingernail health analyser",
+            "difficulty": 7
+        }
+    ],
+    "stacks": [
+        "python",
+        "rust",
+        "C#"
+    ],
+    "platforms": [
+        "windows",
+        "linux",
+        "aws"
+    ],
+    "modifiers": [
+        {
+            "name": "no ide",
+            "modifier": 5
+        },
+        {
+            "name": "run once",
+            "modifier": 8
+        },
+        {
+            "name": "provide tests",
+            "modifier": 2
+        }
+    ]
+}

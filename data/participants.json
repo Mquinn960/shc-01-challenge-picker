@@ -1,0 +1,32 @@
+{
+    "matt": {
+        "stacks": [
+            {
+                "name": "python",
+                "familiarity": 9
+            },
+            {
+                "name": "rust",
+                "familiarity": 1
+            },
+            {
+                "name": "C#",
+                "familiarity": 5
+            }
+        ],
+        "platforms": [
+            {
+                "name": "windows",
+                "familiarity": 9
+            },
+            {
+                "name": "linux",
+                "familiarity": 7
+            },
+            {
+                "name": "aws",
+                "familiarity": 5
+            }
+        ]
+    }
+}
