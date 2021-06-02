@@ -20,6 +20,10 @@ class Config():
         return self._participants[current_participant]
 
     @property
+    def no_experience_modifier(self):
+        return self._base_config['no_experience_modifier']
+
+    @property
     def generator_type(self):
         return self._base_config['generator_type']
 

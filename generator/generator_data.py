@@ -3,7 +3,6 @@ from config import Config
 class GeneratorData():
 
     _base_config: Config = None
-    _no_experience_modifier = 7
 
     _objectives = []
     _modifiers = []
@@ -12,6 +11,10 @@ class GeneratorData():
         self._base_config = config
         self._compile_objectives()
         self._compile_modifiers()
+
+    @property
+    def _no_experience_modifier(self):
+        return self._base_config.no_experience_modifier
 
     @property
     def generator_type(self):
@@ -46,20 +49,24 @@ class GeneratorData():
 
         # Adding tech stacks with modifier weighting based on inverse familiarity
         for stack in stacks:
+            found = False
             for participant_stack in participant['stacks']:
                 if stack == participant_stack['name']:
                     modifier = difficulty_scale - participant_stack['familiarity']
                     combined_modifiers.append({'name': stack, 'modifier': modifier, 'type': 'stacks'})
-                else:
-                    combined_modifiers.append({'name': stack, 'modifier': self._no_experience_modifier, 'type': 'stacks'})
+                    found = True
+            if not found:
+                combined_modifiers.append({'name': stack, 'modifier': self._no_experience_modifier, 'type': 'stacks'})
 
         # Adding platforms with modifier weighting based on inverse familiarity
         for platform in platforms:
+            found = False
             for participant_platform in participant['platforms']:
                 if platform == participant_platform['name']:
                     modifier = difficulty_scale - participant_platform['familiarity']
                     combined_modifiers.append({'name': platform, 'modifier': modifier, 'type': 'platforms'})
-                else:
-                    combined_modifiers.append({'name': platform, 'modifier': self._no_experience_modifier, 'type': 'platforms'})
+                    found = True
+            if not found:
+                combined_modifiers.append({'name': platform, 'modifier': self._no_experience_modifier, 'type': 'platforms'})
 
         self._modifiers = combined_modifiers
