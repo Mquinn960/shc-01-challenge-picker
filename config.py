@@ -20,6 +20,10 @@ class Config():
         return self._participants[current_participant]
 
     @property
+    def generator_type(self):
+        return self._base_config['generator_type']
+
+    @property
     def difficulty_scale(self):
         return self._base_config['difficulty_scale']
 

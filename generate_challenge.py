@@ -20,6 +20,7 @@ def create_challenge(difficulty, challenge=None):
 
     generator = Generator(GeneratorData(Config("./config.json")))
     generated_challenge = generator.generate_challenge(difficulty, challenge)
+    generated_challenge.get_challenge()
 
     click.echo("Generation complete!")
 

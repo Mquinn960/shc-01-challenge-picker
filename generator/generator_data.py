@@ -1,4 +1,4 @@
-from ..config import Config
+from config import Config
 
 class GeneratorData():
 
@@ -14,7 +14,7 @@ class GeneratorData():
 
     @property
     def generator_type(self):
-        return self._base_config['generator_type']
+        return self._base_config.generator_type
 
     @property
     def objectives(self):
