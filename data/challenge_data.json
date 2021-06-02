@@ -9,7 +9,7 @@
             "difficulty": 2
         },
         {
-            "name": "project file managet",
+            "name": "project file manager",
             "difficulty": 2
         },
         {
@@ -19,17 +19,31 @@
         {
             "name": "fingernail health analyser",
             "difficulty": 7
+        },
+        {
+            "name": "code analyser",
+            "difficulty": 4
+        },
+        {
+            "name": "random number generator",
+            "difficulty": 2
         }
     ],
     "stacks": [
         "python",
         "rust",
-        "C#"
+        "C#",
+        "SQL",
+        "Java",
+        "ruby"
     ],
     "platforms": [
         "windows",
         "linux",
-        "aws"
+        "aws",
+        "raspberry pi",
+        "azure",
+        "ESP32"
     ],
     "modifiers": [
         {
@@ -43,6 +57,10 @@
         {
             "name": "provide tests",
             "modifier": 2
+        },
+        {
+            "name": "alternate language variable names",
+            "modifier": 1
         }
     ]
 }

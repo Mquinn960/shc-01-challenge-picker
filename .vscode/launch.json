@@ -16,6 +16,17 @@
             "console": "integratedTerminal"
         },
         {
+            "name": "Hard challenge",
+            "type": "python",
+            "request": "launch",
+            "program": "generate_challenge.py",
+            "args": [
+                "--difficulty",
+                "hard"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Specific challenge",
             "type": "python",
             "request": "launch",

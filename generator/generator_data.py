@@ -3,6 +3,7 @@ from config import Config
 class GeneratorData():
 
     _base_config: Config = None
+    _no_experience_modifier = 7
 
     _objectives = []
     _modifiers = []
@@ -40,7 +41,7 @@ class GeneratorData():
 
         # Adding modifiers which are irrespective of participant skill
         for modifier in modifiers:
-            modifier['type'] = 'modifier'
+            modifier['type'] = 'modifiers'
         combined_modifiers.extend(modifiers)
 
         # Adding tech stacks with modifier weighting based on inverse familiarity
@@ -48,13 +49,17 @@ class GeneratorData():
             for participant_stack in participant['stacks']:
                 if stack == participant_stack['name']:
                     modifier = difficulty_scale - participant_stack['familiarity']
-                    combined_modifiers.append({'name': stack, 'modifier': modifier, 'type': 'stack'})
+                    combined_modifiers.append({'name': stack, 'modifier': modifier, 'type': 'stacks'})
+                else:
+                    combined_modifiers.append({'name': stack, 'modifier': self._no_experience_modifier, 'type': 'stacks'})
 
         # Adding platforms with modifier weighting based on inverse familiarity
         for platform in platforms:
             for participant_platform in participant['platforms']:
                 if platform == participant_platform['name']:
                     modifier = difficulty_scale - participant_platform['familiarity']
-                    combined_modifiers.append({'name': stack, 'modifier': modifier, 'type': 'platform'})
+                    combined_modifiers.append({'name': platform, 'modifier': modifier, 'type': 'platforms'})
+                else:
+                    combined_modifiers.append({'name': platform, 'modifier': self._no_experience_modifier, 'type': 'platforms'})
 
         self._modifiers = combined_modifiers

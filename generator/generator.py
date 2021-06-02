@@ -6,15 +6,15 @@ from generator.generation.generation_strategy_factory import GenerationStrategyF
 class Generator():
 
     _data: GeneratorData = None
+    _generation_strategy: IGenerationStrategy = None
 
     def __init__(self, data: GeneratorData):
         self._data = data
+        self._generation_strategy = self._initialise_generator()
 
     def generate_challenge(self, difficulty, challenge):
-
-        generation_strategy = self._initialise_generator()
         difficulty_type = Difficulty[difficulty.upper()]
-        return generation_strategy.generate(difficulty_type, challenge)
+        return self._generation_strategy.generate(difficulty_type, challenge)
 
     def _initialise_generator(self) -> IGenerationStrategy:
         _generation_strategy_factory = GenerationStrategyFactory(self._data.objectives, self._data.modifiers)

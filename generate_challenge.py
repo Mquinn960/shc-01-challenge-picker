@@ -19,8 +19,10 @@ def create_challenge(difficulty, challenge=None):
     click.echo("Generating...")
 
     generator = Generator(GeneratorData(Config("./config.json")))
-    generated_challenge = generator.generate_challenge(difficulty, challenge)
-    generated_challenge.get_challenge()
+
+    for i in range(1, 40):
+        generated_challenge = generator.generate_challenge(difficulty, challenge)
+        print(generated_challenge.get_challenge())
 
     click.echo("Generation complete!")
 
