@@ -149,19 +149,49 @@ a proper optimisation algorithm would also be a fun addition.
   - No tests per se
   - Doesn't automatically output to a file (no time) but can be piped to do so
   - Some generator logic not in main config
-  - Didn't hit bonnus points for an interactive view/UI
+  - Didn't hit bonus points for an interactive view/UI
 
 ### Timings
 
 |Objective|Split|
 |---|---|
-|Planning|00:20:00|
-|API Implentation|01:40:00|
+|Planning Phase|00:12:42|
+|Planning Phase|00:08:33|
+|Creating datasets|00:10:07|
+|Creating datasets|00:04:08|
+|CLI layer|00:09:55|
+|Creating example run configs|00:01:00|
+|Reworking config to support multiple participants|00:04:33|
+|Basic JSON config parsing|00:28:54|
+|Creating git repo, ignore and readme|00:02:54|
+|Preprocessing data prior to generation phase|00:43:45|
+|Bluescreen of death|00:06:01|
+|Preprocessing data prior to generation phase|00:07:12|
+|Switchable generators|00:16:36|
+|Switchable generators|00:32:31|
+|Naive generator|00:30:27|
+|Knapsack generator|00:27:36|
+|Multiple generation flag|00:14:29|
+|README|00:01:56|
+|README|00:00:44|
+|README|00:38:40|
+|README|00:05:21|
+
+Admin Time: 0:46:41
+Build Time: 04:05:29
 
 ### Lessons Learned
 
-- awdawdawd
-- awd awdawd
+- Super important to cut your cloth and concentrate on the brief
+- Stubbing out integrations is a good way to save time
+- Boilerplate takes longer than you think
+
+### If I had more time
+
+- Integrate with Trello API
+- Integrate with Github API for familiarity scores
+- Implement further optimisation strategies
+- Extend scaling of difficulty modifiers
 
 ---
 ## Acknowledgements 

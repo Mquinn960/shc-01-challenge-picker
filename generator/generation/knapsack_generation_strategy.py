@@ -17,7 +17,7 @@ class KnapsackGenerationStrategy(BaseGenerationStrategy, IGenerationStrategy):
     set of modifiers that satisfies the criteria.
     """
 
-    _desired_modifier_count = 3
+    _desired_modifier_count = 1
 
     def generate(self, difficulty: Difficulty, challenge: str) -> Challenge:
 
