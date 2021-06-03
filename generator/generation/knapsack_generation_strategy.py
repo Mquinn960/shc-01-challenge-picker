@@ -1,39 +1,68 @@
+import random, math
+
 from generator.generation.base_generation_strategy import BaseGenerationStrategy
 from generator.generation.igeneration_strategy import IGenerationStrategy
+from generator.subset_finder import SubsetFinder
 from generator.difficulty import Difficulty
 from generator.challenge import Challenge
 
 class KnapsackGenerationStrategy(BaseGenerationStrategy, IGenerationStrategy):
 
     """
+    This is a pseudo knapsack generation strategy (we don't have values associated)
+    with modifiers - only detractors (weighting).
+
+    This 
     """
+
+    _desired_modifier_count = 2
 
     def generate(self, difficulty: Difficulty, challenge: str) -> Challenge:
 
-        def knapSack(W, wt, n):
-    
-            if n == 0 or W == 0:
-                return 0
-        
-            if (wt[n-1]['modifier'] > W):
-                return knapSack(W, wt, n-1)
-        
-            else:
-                return knapSack(W, wt, n-1)
+        subset_finder = SubsetFinder()
+        modifiers = []
+        actual_modifier_count = 0
 
-        def subsetsum(array, num):
-            if sum([x['modifier'] for x in array]) == num:
-                return array
-            if len(array) > 1:
-                for subset in (array[:-1], array[1:]):
-                    result = subsetsum(subset, num)
-                    if result is not None:
-                        return result
+        if not challenge:
+             challenge = self._select_challenge(difficulty)
 
-        y = subsetsum(self._modifiers, difficulty.value)
+        available_capacity = difficulty.value - challenge['difficulty']
+        continue_optimisation = True
 
-        x = knapSack(difficulty.value, self._modifiers, len(self._modifiers))
+        if self._desired_modifier_count > 1:
+            while self._desired_modifier_count > 1 and continue_optimisation and actual_modifier_count >= self._desired_modifier_count:
+                temp_modifiers = self._modifiers.copy()
+                for i in range(self._desired_modifier_count):
+                    aggregated_modifiers = []
+                    capacity = math.floor(available_capacity / self._desired_modifier_count)
+                    additional_subset = subset_finder.find_subset(temp_modifiers, capacity)
+                    if additional_subset:
+                        aggregated_modifiers.extend(subset_finder.find_subset(temp_modifiers, capacity))
+                    if aggregated_modifiers:
+                        for modifier in aggregated_modifiers:
+                            temp_modifiers.remove(modifier)
+                        modifiers.extend(aggregated_modifiers)
+                        actual_modifier_count =+ sum(len(modifiers))
+                if modifiers:
+                    continue_optimisation = False
+                else:
+                    self._desired_modifier_count -= 1
+        else:
+            modifiers = subset_finder.find_subset(self._modifiers, available_capacity)
 
-        return Challenge(challenge, self._additional_modifiers, self._current_difficulty)
+        current_difficulty = challenge['difficulty'] + sum([x['modifier'] for x in modifiers])
 
-    
+        return Challenge(challenge, modifiers, current_difficulty)
+
+    def _select_challenge(self, difficulty):
+
+        exhaustion = len(self._challenges)
+        attempts = 0
+
+        while attempts < exhaustion:
+            choice = random.choice(self._challenges)
+            if choice['difficulty'] <= difficulty.value:
+                return choice
+            attempts += 1
+
+        raise Exception("Exhaustion reached - no suitable challenges in database for this difficulty")

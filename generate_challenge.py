@@ -11,7 +11,11 @@ from generator.generator import Generator
 @click.option('--challenge', 
               help='Specify a challenge to customise',
               default=None)
-def create_challenge(difficulty, challenge=None):
+@click.option('--multiple', 
+              help='How many challenges to generate',
+              default=1,
+              type=int)
+def create_challenge(difficulty, challenge, multiple):
 
     click.echo(f"Requested {difficulty} challenge.")
     if challenge:
@@ -20,7 +24,7 @@ def create_challenge(difficulty, challenge=None):
 
     generator = Generator(GeneratorData(Config("./config.json")))
 
-    for i in range(1, 40):
+    for i in range(0, multiple):
         generated_challenge = generator.generate_challenge(difficulty, challenge)
         print(generated_challenge.get_challenge())
 

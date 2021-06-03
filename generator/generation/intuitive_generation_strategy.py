@@ -1,13 +1,18 @@
 import random
 
+from generator.subset_finder import SubsetFinder
 from generator.generation.base_generation_strategy import BaseGenerationStrategy
 from generator.generation.igeneration_strategy import IGenerationStrategy
 from generator.difficulty import Difficulty
 from generator.challenge import Challenge
 
-class NaiveGenerationStrategy(BaseGenerationStrategy, IGenerationStrategy):
+class IntuitiveGenerationStrategy(BaseGenerationStrategy, IGenerationStrategy):
 
     """
+    This is an intutive generation strategy - which basically means it's
+    my guess at a semi-sensible approach for defining random challenges with
+    modifiers.
+
     Rationale/pseudocode for this intuitive generator:
 
     Randomly pick a challenge
@@ -18,12 +23,16 @@ class NaiveGenerationStrategy(BaseGenerationStrategy, IGenerationStrategy):
                   add to the challenge difficulty
                   If it's still below target difficulty
                       add another?
-                  Else submit challenge with modifiers        
+                  Else submit challenge with modifiers
+
+    If there's still remaining space, option to fill it with
+    the best matching modifier.        
 
     Else submit challenge no modifiers
     """
 
     _stack_preference_weighting = 0.8
+    _fill_space = True
     _current_difficulty = 0
     _additional_modifiers = []
 
@@ -49,6 +58,16 @@ class NaiveGenerationStrategy(BaseGenerationStrategy, IGenerationStrategy):
                         self._add_conditional_modifier('modifiers', difficulty)
             else:
                 self._add_conditional_modifier('modifiers', difficulty)
+
+        if self._fill_space:
+            subset_finder = SubsetFinder()
+            available_capacity = difficulty.value - self._current_difficulty
+            remaining_modifiers = self._modifiers.copy()
+            for modifier in self._additional_modifiers:
+                remaining_modifiers.remove(modifier)
+            filler_modifiers = subset_finder.find_subset(remaining_modifiers, available_capacity)
+            if filler_modifiers:
+                self._additional_modifiers.extend(filler_modifiers)
 
         return Challenge(challenge, self._additional_modifiers, self._current_difficulty)
 
