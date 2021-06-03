@@ -13,6 +13,11 @@ class Generator():
         self._generation_strategy = self._initialise_generator()
 
     def generate_challenge(self, difficulty, challenge):
+
+        find_challenge = [x for x in self._data.objectives if x['name'] == challenge]
+        if find_challenge:
+            challenge = find_challenge[0]
+
         difficulty_type = Difficulty[difficulty.upper()]
         return self._generation_strategy.generate(difficulty_type, challenge)
 

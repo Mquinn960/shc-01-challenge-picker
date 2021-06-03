@@ -33,9 +33,9 @@
             "program": "generate_challenge.py",
             "args": [
                 "--difficulty",
-                "medium",
+                "hard",
                 "--challenge",
-                "enigma machine"
+                "code analyser"
             ],
             "console": "integratedTerminal"
         }

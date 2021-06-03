@@ -15,20 +15,23 @@ class IntuitiveGenerationStrategy(BaseGenerationStrategy, IGenerationStrategy):
 
     Rationale/pseudocode for this intuitive generator:
 
-    Randomly pick a challenge
-    
-    If it's less than the difficulty
-          80% chance to pick either a stack or a platform
-              pick a random modifier
-                  add to the challenge difficulty
-                  If it's still below target difficulty
-                      add another?
-                  Else submit challenge with modifiers
+    Randomly pick a challenge if one is not given
+
+    If it's less than the target difficulty
+        If <variable: 80%> chance to pick either a stack or a platform
+            pick a random modifier
+                add to the challenge difficulty
+                If it's still below target difficulty
+                    add the opposing modifier
+                    If it's still below target difficulty
+                        add an exotic modifier
+        Else
+            add an exotic modifier
 
     If there's still remaining space, option to fill it with
-    the best matching modifier.        
+    the best matching modifier.      
 
-    Else submit challenge no modifiers
+    Submit challenge with 0-n modifiers
     """
 
     _stack_preference_weighting = 0.8
