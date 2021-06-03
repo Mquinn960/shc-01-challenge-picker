@@ -29,7 +29,8 @@ This project will output this in a text format
 ### Design
 
 ![Alt text](/docs/whiteboard.jpg?raw=true "whiteboard planning")
-Whiteboard showing design planning
+
+*Whiteboard showing design planning*
 
 In tackling this challenge, I initially set my sights on a modest intuitive
 workflow for picking a base challenge at random, and giving the user the 
@@ -48,7 +49,8 @@ picking tasks optimally.
 ### Implementation
 
 ![Alt text](/docs/output.png?raw=true "program output")
-Showing the program's console output
+
+*Showing the program's console output*
 
 Within the implementation of the task, I took the following basic steps:
 
