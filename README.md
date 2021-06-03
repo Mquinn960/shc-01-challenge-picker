@@ -47,7 +47,7 @@ picking tasks optimally.
 
 ### Implementation
 
-![Alt text](/docs/output.jpg?raw=true "program output")
+![Alt text](/docs/output.png?raw=true "program output")
 Showing the program's console output
 
 Within the implementation of the task, I took the following basic steps:
